@@ -67,5 +67,6 @@ namespace projectC
             f.Show();
             this.Hide();
         }
+        private void test{}
     }
 }
