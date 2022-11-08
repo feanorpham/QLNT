@@ -24,11 +24,15 @@ namespace projectC
             {
                 dtpickerNBD.Enabled = false;
                 dtpickerNKT.Enabled = true;
+                txtbMKH.Enabled = false;
+                cmbCharP.Enabled = false;
             }
             else
             {
                 dtpickerNBD.Enabled = true;
                 dtpickerNKT.Enabled = true;
+                txtbMKH.Enabled = true;
+                cmbCharP.Enabled = true;
             }
         }
 
@@ -152,10 +156,23 @@ namespace projectC
 
         private void rdXoaHD_CheckedChanged(object sender, EventArgs e)
         {
+            int i;
+            i = dgvQLHD.CurrentRow.Index;
             if (rdXoaHD.Checked == true)
+            {
+                txtbXoa.Text = dgvQLHD.Rows[i].Cells[0].Value.ToString();
                 txtbXoa.Enabled = true;
+                txtbMKH.Enabled = false;
+                cmbCharP.Enabled = false;
+            }
             else
+            {
                 txtbXoa.Enabled = false;
+                txtbXoa.Text = "";
+                txtbMKH.Enabled = true;
+                cmbCharP.Enabled = true;
+            }
+            
         }
 
         private void btunXoa_Click(object sender, EventArgs e)
@@ -181,10 +198,12 @@ namespace projectC
             i = dgvQLHD.CurrentRow.Index;
             txtbMKH.Text = dgvQLHD.Rows[i].Cells[1].Value.ToString();
             cmbCharP.Text = dgvQLHD.Rows[i].Cells[3].Value.ToString();
-            if (rdXoaHD.Checked = true)
-                txtbXoa.Text = dgvQLHD.Rows[i].Cells[0].Value.ToString();
-            else
-                txtbXoa.Text = "";
+        }
+
+        private void dgvQLHD_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 1 && e.Value != null)
+                e.Value = new string('*', e.Value.ToString().Length);
         }
 
         void loand()

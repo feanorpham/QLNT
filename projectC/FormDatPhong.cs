@@ -22,7 +22,7 @@ namespace projectC
 
         private void btunThoat_Click(object sender, EventArgs e)
         {
-            FormMain f = new FormMain(TK,MK,QuyenUser);
+            FormMain f = new FormMain(TK, MK, QuyenUser);
             f.Show();
             this.Hide();
         }
@@ -68,6 +68,21 @@ namespace projectC
             sql.ExecuteQuery(update);
             MessageBox.Show("Đặt thuê phòng trọ thành công, chủ nhà sẽ sớm liên hệ với bạn", "Thông báo");
             FormDatPhong_Load(sender, e);
+        }
+
+        private void btunHuyDP_Click(object sender, EventArgs e)
+        {
+            if (cmbCharP.Text == "")
+                MessageBox.Show("Bạn chưa đặt phòng", "Thông báo");
+            else
+            {
+                string delete = " HuyDatP '" + cmbCharID.Text + "'";
+                conectsql sql = new conectsql();
+                sql.ExecuteQuery(delete);
+                MessageBox.Show("Hủy đặt phòng thành công", "Thông báo");
+                FormDatPhong_Load(sender, e);
+                cmbCharP.Text = "";
+            }
         }
 
         private void FormDatPhong_Load(object sender, EventArgs e)

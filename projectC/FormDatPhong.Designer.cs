@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDatPhong));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btunHuyDP = new System.Windows.Forms.Button();
             this.btunThoat = new System.Windows.Forms.Button();
             this.btunDT = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -69,6 +70,7 @@
             // groupBox1
             // 
             this.groupBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox1.BackgroundImage")));
+            this.groupBox1.Controls.Add(this.btunHuyDP);
             this.groupBox1.Controls.Add(this.btunThoat);
             this.groupBox1.Controls.Add(this.btunDT);
             this.groupBox1.Location = new System.Drawing.Point(13, 22);
@@ -78,13 +80,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Chức Năng";
             // 
+            // btunHuyDP
+            // 
+            this.btunHuyDP.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btunHuyDP.BackgroundImage")));
+            this.btunHuyDP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btunHuyDP.Image = ((System.Drawing.Image)(resources.GetObject("btunHuyDP.Image")));
+            this.btunHuyDP.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btunHuyDP.Location = new System.Drawing.Point(201, 24);
+            this.btunHuyDP.Name = "btunHuyDP";
+            this.btunHuyDP.Size = new System.Drawing.Size(66, 55);
+            this.btunHuyDP.TabIndex = 2;
+            this.btunHuyDP.Text = "Hủy ĐP";
+            this.btunHuyDP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btunHuyDP.UseVisualStyleBackColor = true;
+            this.btunHuyDP.Click += new System.EventHandler(this.btunHuyDP_Click);
+            // 
             // btunThoat
             // 
             this.btunThoat.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btunThoat.BackgroundImage")));
             this.btunThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btunThoat.Image = ((System.Drawing.Image)(resources.GetObject("btunThoat.Image")));
             this.btunThoat.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btunThoat.Location = new System.Drawing.Point(124, 24);
+            this.btunThoat.Location = new System.Drawing.Point(112, 24);
             this.btunThoat.Name = "btunThoat";
             this.btunThoat.Size = new System.Drawing.Size(83, 55);
             this.btunThoat.TabIndex = 1;
@@ -135,7 +152,7 @@
             // cmbUser
             // 
             this.cmbUser.FormattingEnabled = true;
-            this.cmbUser.Location = new System.Drawing.Point(15, 269);
+            this.cmbUser.Location = new System.Drawing.Point(13, 268);
             this.cmbUser.Name = "cmbUser";
             this.cmbUser.Size = new System.Drawing.Size(112, 21);
             this.cmbUser.TabIndex = 13;
@@ -144,7 +161,7 @@
             // cmbCharP
             // 
             this.cmbCharP.FormattingEnabled = true;
-            this.cmbCharP.Location = new System.Drawing.Point(15, 269);
+            this.cmbCharP.Location = new System.Drawing.Point(13, 268);
             this.cmbCharP.Name = "cmbCharP";
             this.cmbCharP.Size = new System.Drawing.Size(112, 21);
             this.cmbCharP.TabIndex = 12;
@@ -271,7 +288,7 @@
             this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
             this.label1.Location = new System.Drawing.Point(17, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 16);
+            this.label1.Size = new System.Drawing.Size(69, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Chủ Nhà:";
             // 
@@ -431,5 +448,6 @@
         private System.Windows.Forms.DataGridViewImageColumn ImageP;
         private System.Windows.Forms.DataGridViewTextBoxColumn CharP;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+        private System.Windows.Forms.Button btunHuyDP;
     }
 }

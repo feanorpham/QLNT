@@ -336,6 +336,7 @@
             this.dgvQLHD.Size = new System.Drawing.Size(782, 189);
             this.dgvQLHD.TabIndex = 0;
             this.dgvQLHD.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQLHD_CellContentClick);
+            this.dgvQLHD.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvQLHD_CellFormatting);
             // 
             // CharHD
             // 
