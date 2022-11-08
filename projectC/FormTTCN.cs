@@ -33,6 +33,10 @@ namespace projectC
             string sql = "select* from tb_KhachHang where UserName = '" + TK.ToString() + "'";
             conectsql connectTo = new conectsql();
             dgvInfo.DataSource = connectTo.ExecuteQuery(sql);
+            if (dgvInfo.Rows.Count > 1)
+                btunKT.Enabled = false;
+            else
+                btunKT.Enabled = true;
         }
 
         private void btunThoat_Click(object sender, EventArgs e)
