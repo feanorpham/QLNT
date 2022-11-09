@@ -131,6 +131,7 @@ namespace projectC
                 conectsql sqlconect1 = new conectsql();
                 dgvInfo.DataSource = sqlconect1.ExecuteQuery(select);
                 loadUser();
+                btunKT.Enabled = false;
             }
             else
             {

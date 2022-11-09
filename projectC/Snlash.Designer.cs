@@ -60,7 +60,7 @@
             this.groupBox1.Size = new System.Drawing.Size(635, 425);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Zala";
+            this.groupBox1.Text = "Nhóm 4";
             // 
             // pictureBox1
             // 
@@ -90,7 +90,7 @@
             // 
             // listBox1
             // 
-            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.listBox1.BackColor = System.Drawing.Color.FloralWhite;
             this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
@@ -143,9 +143,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft New Tai Lue", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(17, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 27);
+            this.label1.Size = new System.Drawing.Size(266, 27);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Leo Program";
+            this.label1.Text = "Nhóm 4 : Quản Lý Nhà Trọ";
             // 
             // progressBar1
             // 

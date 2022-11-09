@@ -215,10 +215,10 @@
             // txtbMKH
             // 
             this.txtbMKH.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtbMKH.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbMKH.Location = new System.Drawing.Point(99, 42);
             this.txtbMKH.Multiline = true;
             this.txtbMKH.Name = "txtbMKH";
-            this.txtbMKH.PasswordChar = '*';
             this.txtbMKH.Size = new System.Drawing.Size(259, 27);
             this.txtbMKH.TabIndex = 16;
             // 

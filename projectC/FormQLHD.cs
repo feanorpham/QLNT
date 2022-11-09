@@ -156,11 +156,8 @@ namespace projectC
 
         private void rdXoaHD_CheckedChanged(object sender, EventArgs e)
         {
-            int i;
-            i = dgvQLHD.CurrentRow.Index;
             if (rdXoaHD.Checked == true)
             {
-                txtbXoa.Text = dgvQLHD.Rows[i].Cells[0].Value.ToString();
                 txtbXoa.Enabled = true;
                 txtbMKH.Enabled = false;
                 cmbCharP.Enabled = false;
@@ -198,6 +195,8 @@ namespace projectC
             i = dgvQLHD.CurrentRow.Index;
             txtbMKH.Text = dgvQLHD.Rows[i].Cells[1].Value.ToString();
             cmbCharP.Text = dgvQLHD.Rows[i].Cells[3].Value.ToString();
+            if (rdXoaHD.Checked == true)
+                txtbXoa.Text = dgvQLHD.Rows[i].Cells[0].Value.ToString();
         }
 
         private void dgvQLHD_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
