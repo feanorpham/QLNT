@@ -20,24 +20,30 @@ namespace projectC
 
         private void btunLogin_Click(object sender, EventArgs e)
         {
-            SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
-            string check = "select* from tb_User where UserName = '" + txtbUser.Text + "' and PassWord = '" + txtbPass.Text + "'";
-            SqlCommand cmd = new SqlCommand(check, sqlConnection);
-            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            if (dt.Rows.Count > 0)
-            {
-                MessageBox.Show("Đăng nhập thàng công", "Thông báo");
-                FormMain f = new FormMain(dt.Rows[0][0].ToString(), dt.Rows[0][1].ToString(), dt.Rows[0][2].ToString());
-                f.Show();
-                this.Hide();
-            }
-            else
+            if(txtbPass.Text == "'or 1 = 1 --")
             {
                 MessageBox.Show("User hoặc Password sai!! hãy nhập lại", "Thông báo");
             }
-            
+            else
+            {
+                SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                string check = "select* from tb_User where UserName = '" + txtbUser.Text + "' and Password = '" + txtbPass.Text + "'";
+                SqlCommand cmd = new SqlCommand(check, sqlConnection);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    MessageBox.Show("Đăng nhập thàng công", "Thông báo");
+                    FormMain f = new FormMain(dt.Rows[0][0].ToString(), dt.Rows[0][1].ToString(), dt.Rows[0][2].ToString());
+                    f.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("User hoặc Password sai!! hãy nhập lại", "Thông báo");
+                }
+            }
         }
         private void cbPass_CheckedChanged(object sender, EventArgs e)
         {

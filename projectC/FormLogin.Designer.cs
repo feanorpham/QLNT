@@ -161,7 +161,6 @@
             this.txtbPass.Location = new System.Drawing.Point(55, 215);
             this.txtbPass.Multiline = true;
             this.txtbPass.Name = "txtbPass";
-            this.txtbPass.PasswordChar = '*';
             this.txtbPass.Size = new System.Drawing.Size(335, 30);
             this.txtbPass.TabIndex = 1;
             // 
