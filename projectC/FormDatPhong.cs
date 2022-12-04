@@ -31,6 +31,7 @@ namespace projectC
         {
             int i;
             i = dgvDP.CurrentRow.Index;
+            txtTenP.Text = dgvDP.Rows[i].Cells[1].Value.ToString();
             txtbTenCN.Text = dgvDP.Rows[i].Cells[7].Value.ToString();
             txtbGia.Text = dgvDP.Rows[i].Cells[4].Value.ToString();
             txtbLoaiP.Text = dgvDP.Rows[i].Cells[3].Value.ToString();
@@ -38,6 +39,7 @@ namespace projectC
             txtbSDT.Text = dgvDP.Rows[i].Cells[8].Value.ToString();
             cmbCharP.Text = dgvDP.Rows[i].Cells[0].Value.ToString();
             cmbUser.Text = dgvDP.Rows[i].Cells[9].Value.ToString();
+            cmbTT.Text = dgvDP.Rows[i].Cells[6].Value.ToString();
             byte[] bytes = (byte[])dgvDP.Rows[i].Cells[5].Value;
             MemoryStream ms = new MemoryStream(bytes);
             System.Drawing.Image img = System.Drawing.Image.FromStream(ms);
@@ -51,6 +53,7 @@ namespace projectC
             this.MK = MK;
             this.QuyenUser = QuyenUser;
             txtbTenCN.Enabled = false;
+            txtTenP.Enabled = false;
             txtbSDT.Enabled = false;
             txtbDiaChi.Enabled = false;
             txtbGia.Enabled = false;
@@ -61,13 +64,21 @@ namespace projectC
 
         private void btunDT_Click(object sender, EventArgs e)
         {
-            string insert = "insert into tb_DatPhong values('" + cmbUser.Text + "','" + cmbCharID.Text + "','" + cmbCharP.Text + "')";
-            conectsql sql = new conectsql();
-            sql.ExecuteQuery(insert);
-            string update = "update tb_Phong set TinhTrang = N'Đang Chờ Thuê' where CharP in (select CharP from tb_DatPhong where CharP = CharP)";
-            sql.ExecuteQuery(update);
-            MessageBox.Show("Đặt thuê phòng trọ thành công, chủ nhà sẽ sớm liên hệ với bạn", "Thông báo");
-            FormDatPhong_Load(sender, e);
+           if(cmbTT.Text =="Đang Chờ Thuê" || cmbTT.Text == "")
+            {
+                MessageBox.Show("Phòng nay đã còn người đặt thuê", "Thông báo");
+            }
+            else
+            {
+                string insert = "insert into tb_DatPhong values('" + cmbUser.Text + "','" + cmbCharID.Text + "','" + cmbCharP.Text + "')";
+                conectsql sql = new conectsql();
+                sql.ExecuteQuery(insert);
+                string update = "update tb_Phong set TinhTrang = N'Đang Chờ Thuê' where CharP in (select CharP from tb_DatPhong where CharP = CharP)";
+                sql.ExecuteQuery(update);
+                MessageBox.Show("Đặt thuê phòng trọ thành công, chủ nhà sẽ sớm liên hệ với bạn", "Thông báo");
+                cmbTT.Text = "";
+                FormDatPhong_Load(sender, e);
+            }
         }
 
         private void btunHuyDP_Click(object sender, EventArgs e)
@@ -76,12 +87,19 @@ namespace projectC
                 MessageBox.Show("Bạn chưa đặt phòng", "Thông báo");
             else
             {
-                string delete = " HuyDatP '" + cmbCharID.Text + "'";
-                conectsql sql = new conectsql();
-                sql.ExecuteQuery(delete);
-                MessageBox.Show("Hủy đặt phòng thành công", "Thông báo");
-                FormDatPhong_Load(sender, e);
-                cmbCharP.Text = "";
+               if(MessageBox.Show("Bạn chắc chắn muốn hủy đặt phòng chứ?","Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    string delete = " HuyDatP '" + cmbCharID.Text + "', '" + cmbCharP.Text + "'";
+                    conectsql sql = new conectsql();
+                    sql.ExecuteQuery(delete);
+                    MessageBox.Show("Hủy đặt phòng thành công", "Thông báo");
+                    FormDatPhong_Load(sender, e);
+                    cmbCharP.Text = "";
+                }
+                else
+                {
+                    cmbTT.Focus();
+                }
             }
         }
 

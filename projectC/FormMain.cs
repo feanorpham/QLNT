@@ -39,7 +39,6 @@ namespace projectC
                 btunDP.Enabled = false;
                 tlmenuHT.Enabled = true;
                 qlpt.Enabled = true;
-                loandCheckDT();
             }
             else if (QuyenUser == "Admin")
             {
@@ -54,7 +53,7 @@ namespace projectC
                 tlmenuHT.Enabled = false;
             }
         }
-        void loandSumP()
+        void loadSumP()
         {
             txtb1.Enabled = false;
             txtb2.Enabled = false;
@@ -114,7 +113,7 @@ namespace projectC
             f.Show();
             this.Hide();
         }
-        void loandCheckDT()
+        void loadCheckDT()
         {
             SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
             string check = "select* from tb_DatPhong where UserName = '" + TK.ToString() + "'";
@@ -227,7 +226,7 @@ namespace projectC
             else
             {
                 SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
-                string search = "exec TKP N'" + txtbTK.Text + "'";
+                string search = "exec TKP '%" + txtbTK.Text + "%'";
                 SqlCommand cmd = new SqlCommand(search, sqlConnection);
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -312,7 +311,8 @@ namespace projectC
             string sql = "Exec infoP";
             conectsql connectTo = new conectsql();
             dgvInfo.DataSource = connectTo.ExecuteQuery(sql);
-            loandSumP();
+            loadSumP();
+            loadCheckDT();
 
         }
 

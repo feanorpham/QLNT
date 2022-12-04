@@ -86,9 +86,9 @@
             this.btunThoat.Font = new System.Drawing.Font("Times New Roman", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btunThoat.Image = ((System.Drawing.Image)(resources.GetObject("btunThoat.Image")));
             this.btunThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btunThoat.Location = new System.Drawing.Point(593, 19);
+            this.btunThoat.Location = new System.Drawing.Point(283, 21);
             this.btunThoat.Name = "btunThoat";
-            this.btunThoat.Size = new System.Drawing.Size(66, 26);
+            this.btunThoat.Size = new System.Drawing.Size(66, 31);
             this.btunThoat.TabIndex = 3;
             this.btunThoat.Text = "Thoát";
             this.btunThoat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -101,9 +101,9 @@
             this.btunXoa.Font = new System.Drawing.Font("Times New Roman", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btunXoa.Image = ((System.Drawing.Image)(resources.GetObject("btunXoa.Image")));
             this.btunXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btunXoa.Location = new System.Drawing.Point(534, 19);
+            this.btunXoa.Location = new System.Drawing.Point(224, 21);
             this.btunXoa.Name = "btunXoa";
-            this.btunXoa.Size = new System.Drawing.Size(53, 26);
+            this.btunXoa.Size = new System.Drawing.Size(53, 31);
             this.btunXoa.TabIndex = 2;
             this.btunXoa.Text = "Xóa";
             this.btunXoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -116,9 +116,9 @@
             this.btunSua.Font = new System.Drawing.Font("Times New Roman", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btunSua.Image = ((System.Drawing.Image)(resources.GetObject("btunSua.Image")));
             this.btunSua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btunSua.Location = new System.Drawing.Point(411, 19);
+            this.btunSua.Location = new System.Drawing.Point(104, 21);
             this.btunSua.Name = "btunSua";
-            this.btunSua.Size = new System.Drawing.Size(114, 26);
+            this.btunSua.Size = new System.Drawing.Size(114, 31);
             this.btunSua.TabIndex = 1;
             this.btunSua.Text = "Sửa Thông Tin";
             this.btunSua.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -131,9 +131,9 @@
             this.btunKT.Font = new System.Drawing.Font("Times New Roman", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btunKT.Image = ((System.Drawing.Image)(resources.GetObject("btunKT.Image")));
             this.btunKT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btunKT.Location = new System.Drawing.Point(319, 19);
+            this.btunKT.Location = new System.Drawing.Point(16, 20);
             this.btunKT.Name = "btunKT";
-            this.btunKT.Size = new System.Drawing.Size(85, 26);
+            this.btunKT.Size = new System.Drawing.Size(83, 33);
             this.btunKT.TabIndex = 0;
             this.btunKT.Text = "Khởi Tạo";
             this.btunKT.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -296,6 +296,7 @@
             this.txtbSDT.Name = "txtbSDT";
             this.txtbSDT.Size = new System.Drawing.Size(349, 33);
             this.txtbSDT.TabIndex = 5;
+            this.txtbSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbSDT_KeyPress);
             // 
             // txtbTen
             // 

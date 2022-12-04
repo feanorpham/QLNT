@@ -28,6 +28,13 @@ namespace projectC
             load();
             loadUser();
         }
+        bool CheckValuesInput()
+        {
+            if (txtbTen.Text.Trim() == "" || txtbDC.Text.Trim() == "" || dtpicker.Text.Trim() == "" || txtbEmail.Text.Trim() == "" || txtbSDT.Text.Trim() == "")
+                return false;
+            else
+                return true;
+        }
         void load()
         {
             string sql = "select* from tb_KhachHang where UserName = '" + TK.ToString() + "'";
@@ -79,9 +86,20 @@ namespace projectC
             txtbDC.Text = dgvInfo.Rows[i].Cells[6].Value.ToString();
             txtbEmail.Text = dgvInfo.Rows[i].Cells[7].Value.ToString();
         }
+
+        private void txtbSDT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!Char.IsDigit(e.KeyChar)&&!Char.IsControl(e.KeyChar))
+                e.Handled = true;
+        }
+
         private void btunSua_Click(object sender, EventArgs e)
         {
-            if (txtbTen.Text != "" && cmbGT.Text != "" && txtbSDT.Text != "" && txtbDC.Text != "" && txtbEmail.Text != "")
+            if (CheckValuesInput() == false || txtbCharID.Text.Trim() == "")
+            {
+                MessageBox.Show("Bạn chưa nhập đủ thông tin", "Thông báo");
+            }
+            else
             {
                 SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
                 sqlconect.Open();
@@ -101,15 +119,15 @@ namespace projectC
                 MessageBox.Show("Sửa thông tin thành công", "Thông báo", MessageBoxButtons.OK);
                 load();
             }
-            else if (txtbTen.Text == "" || cmbGT.Text == "" || txtbSDT.Text == "" || txtbDC.Text == "" || txtbEmail.Text == "")
-            {
-                MessageBox.Show("Chưa nhập đủ dữ liệu", "Thông báo", MessageBoxButtons.OK);
-            }
 
         }
         private void btunKT_Click(object sender, EventArgs e)
         {
-            if (txtbTen.Text != "" && cmbGT.Text != "" && txtbSDT.Text != "" && txtbDC.Text != "" && txtbEmail.Text != "")
+            if (CheckValuesInput() == false)
+            {
+                MessageBox.Show("Bạn chưa nhập đủ thông tin", "Thông báo");
+            }
+            else
             {
                 SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
                 sqlconect.Open();
@@ -132,13 +150,6 @@ namespace projectC
                 dgvInfo.DataSource = sqlconect1.ExecuteQuery(select);
                 loadUser();
                 btunKT.Enabled = false;
-            }
-            else
-            {
-                if (txtbTen.Text == "" || cmbGT.Text == "" || txtbSDT.Text == "" || txtbDC.Text == "" || txtbEmail.Text == "")
-                {
-                    MessageBox.Show("Chưa nhập đủ dữ liệu", "Thông báo", MessageBoxButtons.OK);
-                }
             }
         }
 

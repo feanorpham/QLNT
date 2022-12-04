@@ -219,6 +219,7 @@
             this.txtbMKH.Location = new System.Drawing.Point(99, 42);
             this.txtbMKH.Multiline = true;
             this.txtbMKH.Name = "txtbMKH";
+            this.txtbMKH.PasswordChar = '*';
             this.txtbMKH.Size = new System.Drawing.Size(259, 27);
             this.txtbMKH.TabIndex = 16;
             // 

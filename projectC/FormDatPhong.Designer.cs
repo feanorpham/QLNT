@@ -60,6 +60,9 @@
             this.ImageP = new System.Windows.Forms.DataGridViewImageColumn();
             this.CharP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtTenP = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmbTT = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loandAnhPhong)).BeginInit();
@@ -128,6 +131,9 @@
             // groupBox2
             // 
             this.groupBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox2.BackgroundImage")));
+            this.groupBox2.Controls.Add(this.cmbTT);
+            this.groupBox2.Controls.Add(this.txtTenP);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.cmbUser);
             this.groupBox2.Controls.Add(this.cmbCharP);
             this.groupBox2.Controls.Add(this.cmbCharID);
@@ -144,7 +150,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(13, 113);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(871, 295);
+            this.groupBox2.Size = new System.Drawing.Size(871, 343);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông Tin";
@@ -152,7 +158,7 @@
             // cmbUser
             // 
             this.cmbUser.FormattingEnabled = true;
-            this.cmbUser.Location = new System.Drawing.Point(13, 268);
+            this.cmbUser.Location = new System.Drawing.Point(13, 307);
             this.cmbUser.Name = "cmbUser";
             this.cmbUser.Size = new System.Drawing.Size(112, 21);
             this.cmbUser.TabIndex = 13;
@@ -160,17 +166,18 @@
             // 
             // cmbCharP
             // 
+            this.cmbCharP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCharP.FormattingEnabled = true;
-            this.cmbCharP.Location = new System.Drawing.Point(13, 268);
+            this.cmbCharP.Location = new System.Drawing.Point(14, 303);
             this.cmbCharP.Name = "cmbCharP";
-            this.cmbCharP.Size = new System.Drawing.Size(112, 21);
+            this.cmbCharP.Size = new System.Drawing.Size(122, 25);
             this.cmbCharP.TabIndex = 12;
             this.cmbCharP.Visible = false;
             // 
             // cmbCharID
             // 
             this.cmbCharID.FormattingEnabled = true;
-            this.cmbCharID.Location = new System.Drawing.Point(15, 269);
+            this.cmbCharID.Location = new System.Drawing.Point(14, 307);
             this.cmbCharID.Name = "cmbCharID";
             this.cmbCharID.Size = new System.Drawing.Size(112, 21);
             this.cmbCharID.TabIndex = 11;
@@ -182,7 +189,7 @@
             this.loandAnhPhong.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.loandAnhPhong.Location = new System.Drawing.Point(401, 15);
             this.loandAnhPhong.Name = "loandAnhPhong";
-            this.loandAnhPhong.Size = new System.Drawing.Size(457, 264);
+            this.loandAnhPhong.Size = new System.Drawing.Size(457, 322);
             this.loandAnhPhong.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.loandAnhPhong.TabIndex = 10;
             this.loandAnhPhong.TabStop = false;
@@ -191,7 +198,7 @@
             // 
             this.txtbGia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtbGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbGia.Location = new System.Drawing.Point(139, 71);
+            this.txtbGia.Location = new System.Drawing.Point(139, 105);
             this.txtbGia.Multiline = true;
             this.txtbGia.Name = "txtbGia";
             this.txtbGia.Size = new System.Drawing.Size(245, 35);
@@ -202,7 +209,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Image = ((System.Drawing.Image)(resources.GetObject("label5.Image")));
-            this.label5.Location = new System.Drawing.Point(17, 242);
+            this.label5.Location = new System.Drawing.Point(17, 276);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(109, 16);
             this.label5.TabIndex = 8;
@@ -212,7 +219,7 @@
             // 
             this.txtbSDT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtbSDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbSDT.Location = new System.Drawing.Point(139, 227);
+            this.txtbSDT.Location = new System.Drawing.Point(139, 261);
             this.txtbSDT.Multiline = true;
             this.txtbSDT.Name = "txtbSDT";
             this.txtbSDT.Size = new System.Drawing.Size(245, 35);
@@ -223,7 +230,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Image = ((System.Drawing.Image)(resources.GetObject("label3.Image")));
-            this.label3.Location = new System.Drawing.Point(17, 192);
+            this.label3.Location = new System.Drawing.Point(17, 226);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(108, 16);
             this.label3.TabIndex = 6;
@@ -233,7 +240,7 @@
             // 
             this.txtbDiaChi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtbDiaChi.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbDiaChi.Location = new System.Drawing.Point(139, 176);
+            this.txtbDiaChi.Location = new System.Drawing.Point(139, 210);
             this.txtbDiaChi.Multiline = true;
             this.txtbDiaChi.Name = "txtbDiaChi";
             this.txtbDiaChi.Size = new System.Drawing.Size(245, 35);
@@ -244,7 +251,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Image = ((System.Drawing.Image)(resources.GetObject("label4.Image")));
-            this.label4.Location = new System.Drawing.Point(17, 135);
+            this.label4.Location = new System.Drawing.Point(17, 169);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 16);
             this.label4.TabIndex = 4;
@@ -254,7 +261,7 @@
             // 
             this.txtbLoaiP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtbLoaiP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbLoaiP.Location = new System.Drawing.Point(139, 120);
+            this.txtbLoaiP.Location = new System.Drawing.Point(139, 154);
             this.txtbLoaiP.Multiline = true;
             this.txtbLoaiP.Name = "txtbLoaiP";
             this.txtbLoaiP.Size = new System.Drawing.Size(245, 35);
@@ -265,7 +272,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Image = ((System.Drawing.Image)(resources.GetObject("label2.Image")));
-            this.label2.Location = new System.Drawing.Point(17, 85);
+            this.label2.Location = new System.Drawing.Point(17, 119);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 16);
             this.label2.TabIndex = 2;
@@ -288,7 +295,7 @@
             this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
             this.label1.Location = new System.Drawing.Point(17, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 16);
+            this.label1.Size = new System.Drawing.Size(70, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Chủ Nhà:";
             // 
@@ -296,9 +303,9 @@
             // 
             this.groupBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox3.BackgroundImage")));
             this.groupBox3.Controls.Add(this.dgvDP);
-            this.groupBox3.Location = new System.Drawing.Point(12, 414);
+            this.groupBox3.Location = new System.Drawing.Point(12, 462);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(872, 273);
+            this.groupBox3.Size = new System.Drawing.Size(872, 287);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Hiển Thị";
@@ -317,7 +324,7 @@
             this.ImageP,
             this.CharP,
             this.UserName});
-            this.dgvDP.Location = new System.Drawing.Point(6, 18);
+            this.dgvDP.Location = new System.Drawing.Point(6, 19);
             this.dgvDP.Name = "dgvDP";
             this.dgvDP.Size = new System.Drawing.Size(853, 248);
             this.dgvDP.TabIndex = 0;
@@ -392,12 +399,42 @@
             this.UserName.Name = "UserName";
             this.UserName.Visible = false;
             // 
+            // txtTenP
+            // 
+            this.txtTenP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTenP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTenP.Location = new System.Drawing.Point(139, 62);
+            this.txtTenP.Multiline = true;
+            this.txtTenP.Name = "txtTenP";
+            this.txtTenP.Size = new System.Drawing.Size(245, 35);
+            this.txtTenP.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Image = ((System.Drawing.Image)(resources.GetObject("label6.Image")));
+            this.label6.Location = new System.Drawing.Point(17, 76);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(86, 16);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Tên Phòng:";
+            // 
+            // cmbTT
+            // 
+            this.cmbTT.FormattingEnabled = true;
+            this.cmbTT.Location = new System.Drawing.Point(15, 306);
+            this.cmbTT.Name = "cmbTT";
+            this.cmbTT.Size = new System.Drawing.Size(121, 21);
+            this.cmbTT.TabIndex = 16;
+            this.cmbTT.Visible = false;
+            // 
             // FormDatPhong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(893, 692);
+            this.ClientSize = new System.Drawing.Size(893, 749);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -449,5 +486,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CharP;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
         private System.Windows.Forms.Button btunHuyDP;
+        private System.Windows.Forms.TextBox txtTenP;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmbTT;
     }
 }

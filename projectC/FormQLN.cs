@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace projectC
 {
@@ -36,7 +37,7 @@ namespace projectC
             this.QuyenUser = QuyenUser;
             loandCharID();
             loandIDPhong();
-      //      loandLP();
+            loandLP();
             loandSumP();
         }
         void loandSumP()
@@ -89,11 +90,11 @@ namespace projectC
             cmdMP.DataSource = dt;
             sqlconect.Close();
         }
-  /*      void loandLP()
+        void loandLP()
         {
             SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
             sqlconect.Open();
-            var cmd = new SqlCommand("select* from tb_Phong where CharID = '" + txtbCharID.Text + "'", sqlconect);
+            var cmd = new SqlCommand("select distinct LoaiP from tb_Phong ", sqlconect);
             var ex = cmd.ExecuteReader();
             var dt = new DataTable();
             dt.Load(ex);
@@ -102,32 +103,116 @@ namespace projectC
             cmbLoaiP.DataSource = dt;
             sqlconect.Close();
         }
-  */
+        bool CheckValuesInput()
+        {
+            if (txtbTenP.Text.Trim() == "" || txtbDiaChiP.Text.Trim() == "" || cmbLoaiP.Text.Trim() == "" || txtbGiaP.Text.Trim() == "" || cmbTT.Text.Trim() == "" || txtbFileAnh.Text.Trim() == "")
+                return false;
+            else
+                return true;
+        }
+        bool CheckValuesTenP() // kiểm tra tên phòng đã tồn tại chưa
+        {
+            SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+            string check = "select TenP from tb_Phong where TenP = '" + txtbTenP.Text + "'";
+            SqlCommand cmd = new SqlCommand(check, sqlConnection);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                return false;
+                sqlConnection.Close();
+
+            }
+            else
+            {
+                return true;
+                sqlConnection.Close();
+            }
+    }
+        bool CheckValuesTenP1() // kiểm tra tên phòng tồn tại chưa để sửa
+        {
+            SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+            string check = "exec Check_TenP '" + cmdMP.Text + "',N'" + txtbTenP.Text + "'";
+            SqlCommand cmd = new SqlCommand(check, sqlConnection);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                return true;
+                sqlConnection.Close();
+
+            }
+            else
+            {
+                return false;
+                sqlConnection.Close();
+            }
+        }
+        void DeleteHD()
+        {
+            SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+            sqlconect.Open();
+            string update = "exec XoaHD '" + cmdMP.Text + "'";
+            SqlCommand cmd = new SqlCommand();
+            cmd = sqlconect.CreateCommand();
+            cmd.CommandText = update;
+            cmd.ExecuteNonQuery();
+            sqlconect.Close();
+        }
+        bool CheckValuesDelete_P()
+        {
+            SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+            string check = "select TenP from tb_Phong where TenP = N'" + txtbXoa.Text + "' and CharID in (select CharID from tb_KhachHang where UserName in (select UserName from tb_User where UserName = '" + TK.ToString() + "'))";
+            SqlCommand cmd = new SqlCommand(check, sqlConnection);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                return true;
+                sqlConnection.Close();
+
+            }
+            else
+            {
+                return false;
+                sqlConnection.Close();
+            }
+        }
         private void btunKT_Click(object sender, EventArgs e)
         {
             if (rdThemP.Checked == true)
             {
-                Image img = pbLoadImager.Image;
-                byte[] arr;
-                ImageConverter converter = new ImageConverter();
-                arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
-                SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
-                sqlconect.Open();
-                string insert = "insert into tb_Phong values(@TenP,@DiaChiP,@LoaiP,@GiaP,@Image,@CharID,@TinhTrang)";
-                SqlCommand cmd = new SqlCommand();
-                cmd = sqlconect.CreateCommand();
-                cmd.CommandText = insert;
-                cmd.Parameters.AddWithValue("@TenP", txtbTenP.Text);
-                cmd.Parameters.AddWithValue("@DiaChiP", txtbDiaChiP.Text);
-                cmd.Parameters.AddWithValue("@LoaiP", cmbLoaiP.Text);
-                cmd.Parameters.AddWithValue("GiaP", txtbGiaP.Text);
-                cmd.Parameters.AddWithValue("@Image", arr);
-                cmd.Parameters.AddWithValue("@CharID", txtbCharID.Text);
-                cmd.Parameters.AddWithValue("@TinhTrang", cmbTT.Text);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Thêm phòng thành công","Thông báo");
-                FormQLN_Load(sender, e);
-                loandSumP();
+               if(CheckValuesInput() == false || CheckValuesTenP() == false)
+                {
+                    MessageBox.Show("Chưa nhập đủ thông tin hoặc tên phòng đã tồn tại", "Thông báo");
+                }
+                else
+                {
+                    Image img = pbLoadImager.Image;
+                    byte[] arr;
+                    ImageConverter converter = new ImageConverter();
+                    arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
+                    SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                    sqlconect.Open();
+                    string insert = "insert into tb_Phong values(@TenP,@DiaChiP,@LoaiP,@GiaP,@Image,@UrlImage,@CharID,@TinhTrang)";
+                    SqlCommand cmd = new SqlCommand();
+                    cmd = sqlconect.CreateCommand();
+                    cmd.CommandText = insert;
+                    cmd.Parameters.AddWithValue("@TenP", txtbTenP.Text);
+                    cmd.Parameters.AddWithValue("@DiaChiP", txtbDiaChiP.Text);
+                    cmd.Parameters.AddWithValue("@LoaiP", cmbLoaiP.Text);
+                    cmd.Parameters.AddWithValue("GiaP", txtbGiaP.Text);
+                    cmd.Parameters.AddWithValue("@Image", arr);
+                    cmd.Parameters.AddWithValue("@UrlImage", txtbFileAnh.Text);
+                    cmd.Parameters.AddWithValue("@CharID", txtbCharID.Text);
+                    cmd.Parameters.AddWithValue("@TinhTrang", cmbTT.Text);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Thêm phòng thành công", "Thông báo");
+                    FormQLN_Load(sender, e);
+                }
             }
             if (rdhtP.Checked == true)
             {
@@ -137,42 +222,147 @@ namespace projectC
             }
             if (rdSuaP.Checked == true)
             {
-                Image img = pbLoadImager.Image;
-                byte[] arr;
-                ImageConverter converter = new ImageConverter();
-                arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
-                SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
-                sqlconect.Open();
-                string insert = "update tb_Phong set TenP = @TenP, DiaChiP = @DiaChiP, LoaiP = @LoaiP, GiaPhong = @GiaP, ImageP = @Image, CharID = @CharID, TinhTrang = @TinhTrang where CharP = '" + cmdMP.Text + "'";
-                SqlCommand cmd = new SqlCommand();
-                cmd = sqlconect.CreateCommand();
-                cmd.CommandText = insert;
-                cmd.Parameters.AddWithValue("@TenP", txtbTenP.Text);
-                cmd.Parameters.AddWithValue("@DiaChiP", txtbDiaChiP.Text);
-                cmd.Parameters.AddWithValue("@LoaiP", cmbLoaiP.Text);
-                cmd.Parameters.AddWithValue("GiaP", txtbGiaP.Text);
-                cmd.Parameters.AddWithValue("@Image", arr);
-                cmd.Parameters.AddWithValue("@CharID", txtbCharID.Text);
-                cmd.Parameters.AddWithValue("@TinhTrang", cmbTT.Text);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Sửa phòng thành công","Thông báo");
-                FormQLN_Load(sender, e);
-                loandSumP();
-            }
-            if (rdXoaP.Checked == true)
-            {
-                SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
-                sqlconect.Open();
-                string insert = "delete from tb_Phong where TenP = '" + txtbXoa.Text + "'";
-                SqlCommand cmd = new SqlCommand();
-                cmd = sqlconect.CreateCommand();
-                cmd.CommandText = insert;
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Xóa phòng thành công","Thông báo");
-                txtbXoa.Text = "";
-                txtbTenP.Focus();
-                FormQLN_Load(sender, e);
-                loandSumP();
+                if(CheckValuesInput() == false)
+                {
+                    MessageBox.Show("Chưa nhập đủ thông tin", "Thông báo");
+                }
+                else
+                {
+                    if (CheckValuesTenP1() == true)
+                    {
+                        SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                        string check = "exec SavePHD '" + cmdMP.Text + "', '" + TK.ToString() + "'";
+                        SqlCommand cmd = new SqlCommand(check, sqlConnection);
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                        {
+                            if (MessageBox.Show("Nếu bạn thay đổi tình trạng phòng thì sẽ xóa hợp đồng bạn có muốn thay đổi không?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            {
+                                DeleteHD();
+                                Image img = pbLoadImager.Image;
+                                byte[] arr;
+                                ImageConverter converter = new ImageConverter();
+                                arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
+                                SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                                sqlconect.Open();
+                                string insert = "update tb_Phong set TenP = @TenP, DiaChiP = @DiaChiP, LoaiP = @LoaiP, GiaPhong = @GiaP, ImageP = @Image, CharID = @CharID, TinhTrang = @TinhTrang where CharP = '" + cmdMP.Text + "'";
+  //                              SqlCommand cmd = new SqlCommand();
+                                cmd = sqlconect.CreateCommand();
+                                cmd.CommandText = insert;
+                                cmd.Parameters.AddWithValue("@TenP", txtbTenP.Text);
+                                cmd.Parameters.AddWithValue("@DiaChiP", txtbDiaChiP.Text);
+                                cmd.Parameters.AddWithValue("@LoaiP", cmbLoaiP.Text);
+                                cmd.Parameters.AddWithValue("GiaP", txtbGiaP.Text);
+                                cmd.Parameters.AddWithValue("@Image", arr);
+                                cmd.Parameters.AddWithValue("@CharID", txtbCharID.Text);
+                                cmd.Parameters.AddWithValue("@TinhTrang", cmbTT.Text);
+                                cmd.ExecuteNonQuery();
+                                MessageBox.Show("Sửa phòng thành công", "Thông báo");
+                                FormQLN_Load(sender, e);
+                            }
+                            else
+                            {
+                                txtbTenP.Focus();
+                            }
+                        }
+                        else
+                        {
+                            Image img = pbLoadImager.Image;
+                            byte[] arr;
+                            ImageConverter converter = new ImageConverter();
+                            arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
+                            SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                            sqlconect.Open();
+                            string insert = "update tb_Phong set TenP = @TenP, DiaChiP = @DiaChiP, LoaiP = @LoaiP, GiaPhong = @GiaP, ImageP = @Image, CharID = @CharID, TinhTrang = @TinhTrang where CharP = '" + cmdMP.Text + "'";
+ //                           SqlCommand cmd = new SqlCommand();
+                            cmd = sqlconect.CreateCommand();
+                            cmd.CommandText = insert;
+                            cmd.Parameters.AddWithValue("@TenP", txtbTenP.Text);
+                            cmd.Parameters.AddWithValue("@DiaChiP", txtbDiaChiP.Text);
+                            cmd.Parameters.AddWithValue("@LoaiP", cmbLoaiP.Text);
+                            cmd.Parameters.AddWithValue("GiaP", txtbGiaP.Text);
+                            cmd.Parameters.AddWithValue("@Image", arr);
+                            cmd.Parameters.AddWithValue("@CharID", txtbCharID.Text);
+                            cmd.Parameters.AddWithValue("@TinhTrang", cmbTT.Text);
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Sửa phòng thành công", "Thông báo");
+                            FormQLN_Load(sender, e);
+                        }
+
+                    }
+                    else 
+                    {
+                        if(CheckValuesTenP() == false)
+                        {
+                            MessageBox.Show("Tên phòng đã tồn tại", "Thông báo");
+                        }
+                        else
+                        {
+                            SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                            string check = "exec SavePHD '" + cmdMP.Text + "', '" + TK.ToString() + "'";
+                            SqlCommand cmd = new SqlCommand(check, sqlConnection);
+                            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            if (dt.Rows.Count > 0)
+                            {
+                                if (MessageBox.Show("Nếu bạn thay đổi tình trạng phòng thì sẽ xóa hợp đồng bạn có muốn thay đổi không?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                {
+                                    DeleteHD();
+                                    Image img = pbLoadImager.Image;
+                                    byte[] arr;
+                                    ImageConverter converter = new ImageConverter();
+                                    arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
+                                    SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                                    sqlconect.Open();
+                                    string insert = "update tb_Phong set TenP = @TenP, DiaChiP = @DiaChiP, LoaiP = @LoaiP, GiaPhong = @GiaP, ImageP = @Image, CharID = @CharID, TinhTrang = @TinhTrang where CharP = '" + cmdMP.Text + "'";
+ //                                   SqlCommand cmd = new SqlCommand();
+                                    cmd = sqlconect.CreateCommand();
+                                    cmd.CommandText = insert;
+                                    cmd.Parameters.AddWithValue("@TenP", txtbTenP.Text);
+                                    cmd.Parameters.AddWithValue("@DiaChiP", txtbDiaChiP.Text);
+                                    cmd.Parameters.AddWithValue("@LoaiP", cmbLoaiP.Text);
+                                    cmd.Parameters.AddWithValue("GiaP", txtbGiaP.Text);
+                                    cmd.Parameters.AddWithValue("@Image", arr);
+                                    cmd.Parameters.AddWithValue("@CharID", txtbCharID.Text);
+                                    cmd.Parameters.AddWithValue("@TinhTrang", cmbTT.Text);
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show("Sửa phòng thành công", "Thông báo");
+                                    FormQLN_Load(sender, e);
+                                }
+                                else
+                                {
+                                    txtbTenP.Focus();
+                                }
+                            }
+                            else
+                            {
+                                Image img = pbLoadImager.Image;
+                                byte[] arr;
+                                ImageConverter converter = new ImageConverter();
+                                arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
+                                SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                                sqlconect.Open();
+                                string insert = "update tb_Phong set TenP = @TenP, DiaChiP = @DiaChiP, LoaiP = @LoaiP, GiaPhong = @GiaP, ImageP = @Image, CharID = @CharID, TinhTrang = @TinhTrang where CharP = '" + cmdMP.Text + "'";
+ //                               SqlCommand cmd = new SqlCommand();
+                                cmd = sqlconect.CreateCommand();
+                                cmd.CommandText = insert;
+                                cmd.Parameters.AddWithValue("@TenP", txtbTenP.Text);
+                                cmd.Parameters.AddWithValue("@DiaChiP", txtbDiaChiP.Text);
+                                cmd.Parameters.AddWithValue("@LoaiP", cmbLoaiP.Text);
+                                cmd.Parameters.AddWithValue("GiaP", txtbGiaP.Text);
+                                cmd.Parameters.AddWithValue("@Image", arr);
+                                cmd.Parameters.AddWithValue("@CharID", txtbCharID.Text);
+                                cmd.Parameters.AddWithValue("@TinhTrang", cmbTT.Text);
+                                cmd.ExecuteNonQuery();
+                                MessageBox.Show("Sửa phòng thành công", "Thông báo");
+                                FormQLN_Load(sender, e);
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -213,6 +403,27 @@ namespace projectC
             cmdMP.Text = "";
             pbLoadImager.Image = null;
             txtbTenP.Focus();
+            if (rdXoaP.Checked == true)
+            {
+                if(txtbXoa.Text.Trim() == "" || CheckValuesDelete_P() == false)
+                {
+                    MessageBox.Show("Hãy nhập tên phòng cần xóa hoặc tên phòng không tồn tại", "Thông báo");
+                }
+                else
+                {
+                    SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                    sqlconect.Open();
+                    string insert = "exec XoaP N'" + txtbXoa.Text + "', '" + TK.ToString() + "'";
+                    SqlCommand cmd = new SqlCommand();
+                    cmd = sqlconect.CreateCommand();
+                    cmd.CommandText = insert;
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Xóa phòng thành công", "Thông báo");
+                    txtbXoa.Text = "";
+                    txtbTenP.Focus();
+                    FormQLN_Load(sender, e);
+                }
+            }
         }
 
         private void rdXoaP_CheckedChanged(object sender, EventArgs e)
@@ -246,6 +457,10 @@ namespace projectC
             string output = "exec Phong_QLCN '" + txtbCharID.Text + "'";
             conectsql conectTo = new conectsql();
             dgvQLN.DataSource = conectTo.ExecuteQuery(output);
+            loandIDPhong();
+            loandLP();
+            loandCharID();
+            loandSumP();
         }
 
         private void btunHD_Click(object sender, EventArgs e)
@@ -253,6 +468,12 @@ namespace projectC
             FormQLHD f = new FormQLHD(TK, MK, QuyenUser);
             f.Show();
             this.Hide();
+        }
+
+        private void txtbGiaP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!Char.IsDigit(e.KeyChar)&&!Char.IsControl(e.KeyChar))
+                e.Handled = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -271,13 +492,14 @@ namespace projectC
             cmbLoaiP.Text = dgvQLN.Rows[i].Cells[3].Value.ToString();
             txtbGiaP.Text = dgvQLN.Rows[i].Cells[4].Value.ToString();
             cmdMP.Text = dgvQLN.Rows[i].Cells[0].Value.ToString();
-            cmbTT.Text = dgvQLN.Rows[i].Cells[6].Value.ToString();
+            txtbFileAnh.Text = dgvQLN.Rows[i].Cells[6].Value.ToString();
+            cmbTT.Text = dgvQLN.Rows[i].Cells[7].Value.ToString();
             byte[] bytes = (byte[])dgvQLN.Rows[i].Cells[5].Value;
             MemoryStream ms = new MemoryStream(bytes);
             System.Drawing.Image img = System.Drawing.Image.FromStream(ms);
             pbLoadImager.Image = img;
             if (rdXoaP.Checked == true)
-                txtbXoa.Text = dgvQLN.Rows[i].Cells[0].Value.ToString();
+                txtbXoa.Text = dgvQLN.Rows[i].Cells[1].Value.ToString();
             else
                 txtbXoa.Text = "";
         }

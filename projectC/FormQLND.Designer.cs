@@ -780,7 +780,7 @@
             this.rdXoaKH.AutoSize = true;
             this.rdXoaKH.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("rdXoaKH.BackgroundImage")));
             this.rdXoaKH.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdXoaKH.Location = new System.Drawing.Point(147, 18);
+            this.rdXoaKH.Location = new System.Drawing.Point(157, 18);
             this.rdXoaKH.Name = "rdXoaKH";
             this.rdXoaKH.Size = new System.Drawing.Size(49, 20);
             this.rdXoaKH.TabIndex = 2;
@@ -809,10 +809,10 @@
             this.rdThemKH.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdThemKH.Location = new System.Drawing.Point(17, 18);
             this.rdThemKH.Name = "rdThemKH";
-            this.rdThemKH.Size = new System.Drawing.Size(125, 20);
+            this.rdThemKH.Size = new System.Drawing.Size(136, 20);
             this.rdThemKH.TabIndex = 0;
             this.rdThemKH.TabStop = true;
-            this.rdThemKH.Text = "Thêm Nhân Viên";
+            this.rdThemKH.Text = "Thêm Khách Hàng";
             this.rdThemKH.UseVisualStyleBackColor = true;
             // 
             // FormQLND

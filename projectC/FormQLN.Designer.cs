@@ -160,13 +160,8 @@
             // 
             // cmbLoaiP
             // 
-            this.cmbLoaiP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLoaiP.Font = new System.Drawing.Font("Times New Roman", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbLoaiP.FormattingEnabled = true;
-            this.cmbLoaiP.Items.AddRange(new object[] {
-            "Phòng Nhỏ",
-            "Phòng Vừa",
-            "Phòng To"});
             this.cmbLoaiP.Location = new System.Drawing.Point(116, 89);
             this.cmbLoaiP.Name = "cmbLoaiP";
             this.cmbLoaiP.Size = new System.Drawing.Size(496, 27);
@@ -274,6 +269,7 @@
             this.txtbGiaP.Name = "txtbGiaP";
             this.txtbGiaP.Size = new System.Drawing.Size(496, 29);
             this.txtbGiaP.TabIndex = 5;
+            this.txtbGiaP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbGiaP_KeyPress);
             // 
             // label3
             // 
