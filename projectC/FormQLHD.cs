@@ -205,6 +205,11 @@ namespace projectC
                 e.Value = new string('*', e.Value.ToString().Length);
         }
 
+        private void cmbCharP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtbMKH.Text = cmbCharP.SelectedValue.ToString();
+        }
+
         void loand()
         {
             SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
@@ -222,8 +227,8 @@ namespace projectC
             else
             {
                 cmbCharP.DisplayMember = "CharP";
+                cmbCharP.ValueMember = "CharID";
                 cmbCharP.DataSource = dt;
-                txtbMKH.Text = dt.Rows[0][2].ToString();
             }
             sqlconect.Close();
         }
@@ -244,8 +249,8 @@ namespace projectC
             else
             {
                 cmbCharP.DisplayMember = "charP";
+                cmbCharP.ValueMember = "CharID";
                 cmbCharP.DataSource = dt;
-                txtbMKH.Text = dt.Rows[0][1].ToString();
             }
             sqlconect.Close();
         }

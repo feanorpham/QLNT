@@ -20,6 +20,7 @@ namespace projectC
             tlmenuHT.Enabled = false;
             tlmenuUser.Enabled = false;
             tlmenuSigout.Enabled = false;
+            loadDiaChiP();
         }
         public FormMain(string TK, string MK, string QuyenUser)
         {
@@ -34,6 +35,7 @@ namespace projectC
             qlpt.Enabled = false;
             tlmenuND.Enabled = false;
             checkInfo();
+            loadDiaChiP();
             if (QuyenUser=="Chủ Nhà")
             {
                 btunDP.Enabled = false;
@@ -150,6 +152,20 @@ namespace projectC
             }
     
         }
+        void loadDiaChiP()
+        {
+            SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+            sqlConnection.Open();
+            var cmd = new SqlCommand("select distinct DiaChiP from tb_Phong", sqlConnection);
+            var ex = cmd.ExecuteReader();
+            var dt = new DataTable();
+            dt.Load(ex);
+            ex.Dispose();
+            cmbDC.Text = "";
+            cmbDC.DisplayMember = "DiaChiP";
+            cmbDC.DataSource = dt;
+            
+        }
         private void tlmenuInfoDP_Click(object sender, EventArgs e)
         {
             InfoNguoiDatPhong f = new InfoNguoiDatPhong(TK, MK, QuyenUser);
@@ -202,23 +218,6 @@ namespace projectC
             f.Show();
             this.Hide();
         }
-
-        private void cmbGia_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(cmbGia.SelectedItem =="Từ thấp đến cao")
-            {
-                string output = "Exec SapXepTang";
-                conectsql sql = new conectsql();
-                dgvInfo.DataSource = sql.ExecuteQuery(output);
-            }
-            if(cmbGia.SelectedItem =="Từ cao đến thấp")
-            {
-                string output = "Exec SapXepGiam";
-                conectsql sql = new conectsql();
-                dgvInfo.DataSource = sql.ExecuteQuery(output);
-            }
-        }
-
         private void btunTK_Click(object sender, EventArgs e)
         {
             if (txtbTK.Text == "")
@@ -226,7 +225,7 @@ namespace projectC
             else
             {
                 SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
-                string search = "exec TKP '%" + txtbTK.Text + "%'";
+                string search = "exec TKP N'%" + txtbTK.Text + "%'";
                 SqlCommand cmd = new SqlCommand(search, sqlConnection);
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -304,6 +303,18 @@ namespace projectC
         private void btunHT_Click(object sender, EventArgs e)
         {
             FormMain_Load(sender, e);
+        }
+
+        private void cmbDC_SelectedValueChanged(object sender, EventArgs e)
+        {
+                SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                string search = "exec TKP1 N'" + cmbDC.Text + "'";
+                SqlCommand cmd = new SqlCommand(search, sqlConnection);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dgvInfo.DataSource = dt;
+
         }
 
         private void FormMain_Load(object sender, EventArgs e)

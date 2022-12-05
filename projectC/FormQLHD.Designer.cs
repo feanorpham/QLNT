@@ -219,7 +219,6 @@
             this.txtbMKH.Location = new System.Drawing.Point(99, 42);
             this.txtbMKH.Multiline = true;
             this.txtbMKH.Name = "txtbMKH";
-            this.txtbMKH.PasswordChar = '*';
             this.txtbMKH.Size = new System.Drawing.Size(259, 27);
             this.txtbMKH.TabIndex = 16;
             // 
@@ -261,6 +260,7 @@
             this.cmbCharP.Name = "cmbCharP";
             this.cmbCharP.Size = new System.Drawing.Size(259, 25);
             this.cmbCharP.TabIndex = 9;
+            this.cmbCharP.SelectedIndexChanged += new System.EventHandler(this.cmbCharP_SelectedIndexChanged);
             // 
             // dtpickerNKT
             // 

@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tlmenuHT = new System.Windows.Forms.ToolStripMenuItem();
             this.qlpt = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,17 +56,18 @@
             this.tlmenuLogin = new System.Windows.Forms.ToolStripMenuItem();
             this.tlmenuSigout = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbDC = new System.Windows.Forms.ComboBox();
+            this.btunHT = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbLocGiaP = new System.Windows.Forms.ComboBox();
             this.btunDP = new System.Windows.Forms.Button();
             this.btunTK = new System.Windows.Forms.Button();
-            this.cmbGia = new System.Windows.Forms.ComboBox();
             this.txtbTK = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvInfo = new System.Windows.Forms.DataGridView();
             this.TenP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiaChiP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LoaiP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GiaPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TinhTrang = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,7 +80,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtb1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btunHT = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -270,13 +270,13 @@
             // groupBox1
             // 
             this.groupBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox1.BackgroundImage")));
+            this.groupBox1.Controls.Add(this.cmbDC);
             this.groupBox1.Controls.Add(this.btunHT);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.cmbLocGiaP);
             this.groupBox1.Controls.Add(this.btunDP);
             this.groupBox1.Controls.Add(this.btunTK);
-            this.groupBox1.Controls.Add(this.cmbGia);
             this.groupBox1.Controls.Add(this.txtbTK);
             this.groupBox1.Location = new System.Drawing.Point(12, 27);
             this.groupBox1.Name = "groupBox1";
@@ -284,6 +284,33 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tìm Kiếm";
+            // 
+            // cmbDC
+            // 
+            this.cmbDC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDC.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World, ((byte)(0)));
+            this.cmbDC.FormattingEnabled = true;
+            this.cmbDC.Items.AddRange(new object[] {
+            "  "});
+            this.cmbDC.Location = new System.Drawing.Point(692, 18);
+            this.cmbDC.Name = "cmbDC";
+            this.cmbDC.Size = new System.Drawing.Size(239, 26);
+            this.cmbDC.TabIndex = 11;
+            this.cmbDC.SelectedValueChanged += new System.EventHandler(this.cmbDC_SelectedValueChanged);
+            // 
+            // btunHT
+            // 
+            this.btunHT.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btunHT.BackgroundImage")));
+            this.btunHT.Image = ((System.Drawing.Image)(resources.GetObject("btunHT.Image")));
+            this.btunHT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btunHT.Location = new System.Drawing.Point(1387, 16);
+            this.btunHT.Name = "btunHT";
+            this.btunHT.Size = new System.Drawing.Size(72, 35);
+            this.btunHT.TabIndex = 10;
+            this.btunHT.Text = "Hiển Thị";
+            this.btunHT.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btunHT.UseVisualStyleBackColor = true;
+            this.btunHT.Click += new System.EventHandler(this.btunHT_Click);
             // 
             // label6
             // 
@@ -301,9 +328,9 @@
             this.label5.Image = ((System.Drawing.Image)(resources.GetObject("label5.Image")));
             this.label5.Location = new System.Drawing.Point(642, 25);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 13);
+            this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 8;
-            this.label5.Text = "Sắp Xếp Giá Phòng:";
+            this.label5.Text = "Địa Chỉ:";
             // 
             // cmbLocGiaP
             // 
@@ -348,20 +375,6 @@
             this.btunTK.UseVisualStyleBackColor = true;
             this.btunTK.Click += new System.EventHandler(this.btunTK_Click);
             // 
-            // cmbGia
-            // 
-            this.cmbGia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World, ((byte)(0)));
-            this.cmbGia.FormattingEnabled = true;
-            this.cmbGia.Items.AddRange(new object[] {
-            "Từ thấp đến cao",
-            "Từ cao đến thấp"});
-            this.cmbGia.Location = new System.Drawing.Point(752, 17);
-            this.cmbGia.Name = "cmbGia";
-            this.cmbGia.Size = new System.Drawing.Size(166, 26);
-            this.cmbGia.TabIndex = 4;
-            this.cmbGia.SelectedIndexChanged += new System.EventHandler(this.cmbGia_SelectedIndexChanged);
-            // 
             // txtbTK
             // 
             this.txtbTK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -389,12 +402,13 @@
             // 
             this.dgvInfo.AllowUserToResizeColumns = false;
             this.dgvInfo.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvInfo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvInfo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TenP,
-            this.DiaChiP,
+            this.Column2,
             this.LoaiP,
             this.GiaPhong,
             this.TinhTrang});
@@ -406,50 +420,40 @@
             // TenP
             // 
             this.TenP.DataPropertyName = "TenP";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.TenP.DefaultCellStyle = dataGridViewCellStyle2;
-            this.TenP.FillWeight = 150F;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.TenP.DefaultCellStyle = dataGridViewCellStyle8;
             this.TenP.HeaderText = "Tên Phòng";
             this.TenP.Name = "TenP";
-            this.TenP.Width = 150;
             // 
-            // DiaChiP
+            // Column2
             // 
-            this.DiaChiP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DiaChiP.DataPropertyName = "DiaChiP";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DiaChiP.DefaultCellStyle = dataGridViewCellStyle3;
-            this.DiaChiP.FillWeight = 400F;
-            this.DiaChiP.HeaderText = "Địa Chỉ";
-            this.DiaChiP.Name = "DiaChiP";
+            this.Column2.DataPropertyName = "DiaChiP";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Column2.HeaderText = "Địa Chỉ Phòng";
+            this.Column2.Name = "Column2";
             // 
             // LoaiP
             // 
-            this.LoaiP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.LoaiP.DataPropertyName = "LoaiP";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.LoaiP.DefaultCellStyle = dataGridViewCellStyle4;
-            this.LoaiP.FillWeight = 150F;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.LoaiP.DefaultCellStyle = dataGridViewCellStyle10;
             this.LoaiP.HeaderText = "Loại Phòng";
             this.LoaiP.Name = "LoaiP";
             // 
             // GiaPhong
             // 
-            this.GiaPhong.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.GiaPhong.DataPropertyName = "GiaPhong";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.GiaPhong.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.GiaPhong.DefaultCellStyle = dataGridViewCellStyle11;
             this.GiaPhong.HeaderText = "Giá Phòng";
             this.GiaPhong.Name = "GiaPhong";
-            this.GiaPhong.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // TinhTrang
             // 
-            this.TinhTrang.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TinhTrang.DataPropertyName = "TinhTrang";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.TinhTrang.DefaultCellStyle = dataGridViewCellStyle6;
-            this.TinhTrang.FillWeight = 130F;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.TinhTrang.DefaultCellStyle = dataGridViewCellStyle12;
             this.TinhTrang.HeaderText = "Tình Trạng";
             this.TinhTrang.Name = "TinhTrang";
             // 
@@ -554,22 +558,9 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Số lương phòng:";
             // 
-            // btunHT
-            // 
-            this.btunHT.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btunHT.BackgroundImage")));
-            this.btunHT.Image = ((System.Drawing.Image)(resources.GetObject("btunHT.Image")));
-            this.btunHT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btunHT.Location = new System.Drawing.Point(1387, 16);
-            this.btunHT.Name = "btunHT";
-            this.btunHT.Size = new System.Drawing.Size(72, 35);
-            this.btunHT.TabIndex = 10;
-            this.btunHT.Text = "Hiển Thị";
-            this.btunHT.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btunHT.UseVisualStyleBackColor = true;
-            this.btunHT.Click += new System.EventHandler(this.btunHT_Click);
-            // 
             // FormMain
             // 
+            this.AcceptButton = this.btunTK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
@@ -615,7 +606,6 @@
         private System.Windows.Forms.ToolStripMenuItem tlmenuLogin;
         private System.Windows.Forms.ToolStripMenuItem tlmenuSigout;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cmbGia;
         private System.Windows.Forms.TextBox txtbTK;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvInfo;
@@ -629,11 +619,6 @@
         private System.Windows.Forms.ToolStripMenuItem tlSuaHD;
         private System.Windows.Forms.ToolStripMenuItem tlXoaHD;
         private System.Windows.Forms.ToolStripMenuItem tlmenuHD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DiaChiP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LoaiP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GiaPhong;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TinhTrang;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtb4;
         private System.Windows.Forms.Label label4;
@@ -647,5 +632,11 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbLocGiaP;
         private System.Windows.Forms.Button btunHT;
+        private System.Windows.Forms.ComboBox cmbDC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LoaiP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GiaPhong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TinhTrang;
     }
 }

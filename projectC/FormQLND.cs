@@ -21,35 +21,55 @@ namespace projectC
         {
             InitializeComponent();
         }
-
+        bool CheckValuesInputUser()
+        {
+            if(txtbUser.Text.Trim() == "" || txtbPass.Text.Trim() == "" || cmbQuyenUs.Text == "")
+                return false;
+            else
+                return true;
+        }
+        bool CheckValuesInputMember()
+        {
+            if(txtbTen.Text.Trim() == "" || txtbDiaChi.Text.Trim() == "" || cmbGT.Text.Trim() == "" || txtbEmail.Text.Trim() == "" || txtbSDT.Text.Trim() == "" || cmbUser.Text.Trim() == "" || dtpickerNS.Text.Trim() == "")
+                return false;
+            else
+                return true;
+        }
         private void btunKT_Click(object sender, EventArgs e)
         {
             if(rdThemUs.Checked == true)
             {
-                SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
-                string check = "select* from tb_User where UserName = '" + txtbUser.Text + "'";
-                SqlCommand cmd = new SqlCommand(check, sqlConnection);
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                if (dt.Rows.Count > 0)
+                if(CheckValuesInputUser() == false)
                 {
-                    MessageBox.Show("User đã tồn tại", "Thông báo");
-                    sqlConnection.Close();
-
+                    MessageBox.Show("Chưa nhập đủ thông tin", "Thông báo");
                 }
                 else
                 {
-                    string insert = "insert into tb_User values('" + txtbUser.Text + "','" + txtbPass.Text + "',N'" + cmbQuyenUs.Text + "')";
-                    conectsql sql = new conectsql();
-                    sql.ExecuteQuery(insert);
-                    MessageBox.Show("Thêm thành công", "Thông báo");
-                    FormQLND_Load(sender, e);
+                    SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                    string check = "select* from tb_User where UserName = '" + txtbUser.Text + "'";
+                    SqlCommand cmd = new SqlCommand(check, sqlConnection);
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        MessageBox.Show("User đã tồn tại", "Thông báo");
+                        sqlConnection.Close();
+
+                    }
+                    else
+                    {
+                        string insert = "insert into tb_User values('" + txtbUser.Text + "','" + txtbPass.Text + "',N'" + cmbQuyenUs.Text + "')";
+                        conectsql sql = new conectsql();
+                        sql.ExecuteQuery(insert);
+                        MessageBox.Show("Thêm thành công", "Thông báo");
+                        FormQLND_Load(sender, e);
+                    }
                 }
             }
             if (rdSuaUs.Checked == true)
             {
-                if (txtbUser.Text == "" || txtbPass.Text == "" || cmbQuyenUs.Text == "")
+                if (CheckValuesInputUser() == false)
                 {
                     MessageBox.Show("Bạn chưa nhập đủ hoặc nhập sai", "Thông báo");
                 }
@@ -63,7 +83,6 @@ namespace projectC
                 }
             }
         }
-
         private void rdXoaUs_CheckedChanged(object sender, EventArgs e)
         {
             if (rdXoaUs.Checked == true)
@@ -99,9 +118,9 @@ namespace projectC
         {
             if(rdThemKH.Checked == true)
             {
-                if (txtbTen.Text == "" || cmbGT.Text == "" || txtbSDT.Text == "" || txtbDiaChi.Text == "" || txtbEmail.Text == "" || cmbUser.Text == "")
+                if (CheckValuesInputMember() == false)
                 {
-                    MessageBox.Show("Chưa nhập giá dữ liệu hoặc chưa nhập đủ", "Thông báo");
+                    MessageBox.Show("Chưa nhập dữ liệu hoặc chưa nhập đủ", "Thông báo");
                 }
                 else
                 {
@@ -114,7 +133,7 @@ namespace projectC
             }
             if(rdSuaKH.Checked == true)
             {
-                if (txtbTen.Text == "" || cmbGT.Text == "" || txtbSDT.Text == "" || txtbDiaChi.Text == "" || txtbEmail.Text == "" || cmbUser.Text == "")
+                if (CheckValuesInputMember() == false || txtbCharID.Text.Trim() == "")
                 {
                     MessageBox.Show("Chưa nhập giá dữ liệu hoặc chưa nhập đủ", "Thông báo");
                 }

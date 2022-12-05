@@ -110,10 +110,10 @@ namespace projectC
             else
                 return true;
         }
-        bool CheckValuesTenP() // kiểm tra tên phòng đã tồn tại chưa
+        bool CheckValuesTenP() // kiểm tra tên phòng đã tồn tại chưa với user
         {
             SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
-            string check = "select TenP from tb_Phong where TenP = '" + txtbTenP.Text + "'";
+            string check = "exec Check_TenP1 '" + TK.ToString() + "',N'" + txtbTenP.Text + "'";
             SqlCommand cmd = new SqlCommand(check, sqlConnection);
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -130,7 +130,7 @@ namespace projectC
                 sqlConnection.Close();
             }
     }
-        bool CheckValuesTenP1() // kiểm tra tên phòng tồn tại chưa để sửa
+        bool CheckValuesTenP1() // kiểm tra tên phòng tồn tại chưa với mã phòng
         {
             SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
             string check = "exec Check_TenP '" + cmdMP.Text + "',N'" + txtbTenP.Text + "'";
@@ -228,7 +228,7 @@ namespace projectC
                 }
                 else
                 {
-                    if (CheckValuesTenP1() == true)
+                    if (CheckValuesTenP1() == true) // nếu tên phòng không thay đổi
                     {
                         SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
                         string check = "exec SavePHD '" + cmdMP.Text + "', '" + TK.ToString() + "'";
@@ -269,36 +269,38 @@ namespace projectC
                         }
                         else
                         {
-                            Image img = pbLoadImager.Image;
-                            byte[] arr;
-                            ImageConverter converter = new ImageConverter();
-                            arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
-                            SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
-                            sqlconect.Open();
-                            string insert = "update tb_Phong set TenP = @TenP, DiaChiP = @DiaChiP, LoaiP = @LoaiP, GiaPhong = @GiaP, ImageP = @Image, CharID = @CharID, TinhTrang = @TinhTrang where CharP = '" + cmdMP.Text + "'";
- //                           SqlCommand cmd = new SqlCommand();
-                            cmd = sqlconect.CreateCommand();
-                            cmd.CommandText = insert;
-                            cmd.Parameters.AddWithValue("@TenP", txtbTenP.Text);
-                            cmd.Parameters.AddWithValue("@DiaChiP", txtbDiaChiP.Text);
-                            cmd.Parameters.AddWithValue("@LoaiP", cmbLoaiP.Text);
-                            cmd.Parameters.AddWithValue("GiaP", txtbGiaP.Text);
-                            cmd.Parameters.AddWithValue("@Image", arr);
-                            cmd.Parameters.AddWithValue("@CharID", txtbCharID.Text);
-                            cmd.Parameters.AddWithValue("@TinhTrang", cmbTT.Text);
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("Sửa phòng thành công", "Thông báo");
-                            FormQLN_Load(sender, e);
+                           if(CheckValuesTenP() == false)
+                            {
+                                Image img = pbLoadImager.Image;
+                                byte[] arr;
+                                ImageConverter converter = new ImageConverter();
+                                arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
+                                SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
+                                sqlconect.Open();
+                                string insert = "update tb_Phong set TenP = @TenP, DiaChiP = @DiaChiP, LoaiP = @LoaiP, GiaPhong = @GiaP, ImageP = @Image, CharID = @CharID, TinhTrang = @TinhTrang where CharP = '" + cmdMP.Text + "'";
+                                //                           SqlCommand cmd = new SqlCommand();
+                                cmd = sqlconect.CreateCommand();
+                                cmd.CommandText = insert;
+                                cmd.Parameters.AddWithValue("@TenP", txtbTenP.Text);
+                                cmd.Parameters.AddWithValue("@DiaChiP", txtbDiaChiP.Text);
+                                cmd.Parameters.AddWithValue("@LoaiP", cmbLoaiP.Text);
+                                cmd.Parameters.AddWithValue("GiaP", txtbGiaP.Text);
+                                cmd.Parameters.AddWithValue("@Image", arr);
+                                cmd.Parameters.AddWithValue("@CharID", txtbCharID.Text);
+                                cmd.Parameters.AddWithValue("@TinhTrang", cmbTT.Text);
+                                cmd.ExecuteNonQuery();
+                                MessageBox.Show("Sửa phòng thành công", "Thông báo");
+                                FormQLN_Load(sender, e);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Tên Phòng đã tồn tại", "Thông báo");
+                            }
                         }
-
                     }
                     else 
                     {
-                        if(CheckValuesTenP() == false)
-                        {
-                            MessageBox.Show("Tên phòng đã tồn tại", "Thông báo");
-                        }
-                        else
+                        if(CheckValuesTenP() == true)
                         {
                             SqlConnection sqlConnection = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
                             string check = "exec SavePHD '" + cmdMP.Text + "', '" + TK.ToString() + "'";
@@ -318,7 +320,7 @@ namespace projectC
                                     SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
                                     sqlconect.Open();
                                     string insert = "update tb_Phong set TenP = @TenP, DiaChiP = @DiaChiP, LoaiP = @LoaiP, GiaPhong = @GiaP, ImageP = @Image, CharID = @CharID, TinhTrang = @TinhTrang where CharP = '" + cmdMP.Text + "'";
- //                                   SqlCommand cmd = new SqlCommand();
+                                    //                                   SqlCommand cmd = new SqlCommand();
                                     cmd = sqlconect.CreateCommand();
                                     cmd.CommandText = insert;
                                     cmd.Parameters.AddWithValue("@TenP", txtbTenP.Text);
@@ -346,7 +348,7 @@ namespace projectC
                                 SqlConnection sqlconect = new SqlConnection(@"Data Source=FEANOR;Initial Catalog=projectD;Integrated Security=True");
                                 sqlconect.Open();
                                 string insert = "update tb_Phong set TenP = @TenP, DiaChiP = @DiaChiP, LoaiP = @LoaiP, GiaPhong = @GiaP, ImageP = @Image, CharID = @CharID, TinhTrang = @TinhTrang where CharP = '" + cmdMP.Text + "'";
- //                               SqlCommand cmd = new SqlCommand();
+                                //                               SqlCommand cmd = new SqlCommand();
                                 cmd = sqlconect.CreateCommand();
                                 cmd.CommandText = insert;
                                 cmd.Parameters.AddWithValue("@TenP", txtbTenP.Text);
@@ -361,10 +363,14 @@ namespace projectC
                                 FormQLN_Load(sender, e);
                             }
                         }
+                        else
+                        {
+                            MessageBox.Show("Tên phòng đã tồn tại", "Thông báo");
+                        }
                     }
+                   }
                 }
             }
-        }
 
         private void btunBrowse_Click(object sender, EventArgs e)
         {
